@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Travel App</title>
+    <title>Medicine Info</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
-    <h1>Travel App</h1>
-    <form id="cityForm">
-        <input type="text" id="cityInput" placeholder="Enter a city">
-        <button type="submit">Search</button>
-    </form>
-    <div id="weather"></div>
-    <div id="hotels"></div>
-    <script src="script.js"></script>
+    <div class="container">
+        <h1>Medicine Information</h1>
+        <form id="medicineForm">
+            <input type="text" id="medicineInput" placeholder="Enter a medicine name">
+            <button type="submit">Search</button>
+        </form>
+        <div id="genericName"></div>
+    </div>
 </body>
 </html>
