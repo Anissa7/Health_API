@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Statistics</title>
     <link rel="stylesheet" href="style.css">
-    <title>Medicine Info</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Medicine Information</h1>
-        <form id="medicineForm">
-            <input type="text" id="medicineInput" placeholder="Enter a medicine name">
-            <button type="submit">Search</button>
-        </form>
-        <div id="genericName"></div>
+    <h1>COVID-19 Statistics by Country</h1>
+    
+    <div id="search-container">
+        <input type="text" id="country-input" placeholder="Enter a country">
+        <button id="search-button">Search</button>
     </div>
+    
+    <table id="stats-table">
+        <tr>
+            <th>Country</th>
+            <th>Cases</th>
+            <th>Deaths</th>
+            <th>Recovered</th>
+        </tr>
+        <!-- Data rows will be added dynamically using JavaScript -->
+    </table>
+
+    <script src="script.js"></script>
 </body>
 </html>
