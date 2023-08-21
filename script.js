@@ -2,17 +2,16 @@ $(document).ready(function() {
     const statsTable = $("#stats-table");
     const countryInput = $("#country-input");
     const searchButton = $("#search-button");
-
+   
+    
     // Function to populate the table with data
-    function populateTable(data) {
-        statsTable.find("tbody").empty(); // Clear existing rows
+    function populateTable(countryData) {
+        statsTable.find("tbody").empty();
         
-        const countryData = data.response[0]; // Assuming the API returns an array of data
         const newRow = $("<tr>").html(`
             <td>${countryData.country}</td>
             <td>${countryData.cases.total}</td>
             <td>${countryData.deaths.total}</td>
-            <td>${countryData.cases.recovered}</td>
         `);
         statsTable.append(newRow);
     }
@@ -22,7 +21,7 @@ $(document).ready(function() {
         const settings = {
             async: true,
             crossDomain: true,
-            url: `https://covid-193.p.rapidapi.com/history?country=${countryName}`,
+            url: `https://covid-193.p.rapidapi.com/statistics?country=${countryName}`,
             method: "GET",
             headers: {
                 "X-RapidAPI-Key": "696cc32825mshf220551f0404d51p1201eajsn651d61b40bf0",
@@ -32,9 +31,9 @@ $(document).ready(function() {
 
         $.ajax(settings).done(function(response) {
             if (response.response) {
-                populateTable(response);
+                populateTable(response.response[0]);
             } else {
-                alert("Country not found or data not available.");
+                alert("Please enter a valid country name.");
             }
         });
     }
@@ -47,7 +46,7 @@ $(document).ready(function() {
             alert("Please enter a valid country name.");
         }
     });
-    
+
     // Fetch data from the second API
     const secondSettings = {
         async: true,
@@ -63,22 +62,31 @@ $(document).ready(function() {
     $.ajax(secondSettings).done(function(response) {
         console.log(response);
     });
-    
-    // Fetch data from the third API
-    const thirdSettings = {
-        async: true,
-        crossDomain: true,
-        url: "'https://covid-193.p.rapidapi.com/history?",
-        method: "GET",
-        headers: {
-            "X-RapidAPI-Key": "696cc32825mshf220551f0404d51p1201eajsn651d61b40bf0",
-			"X-RapidAPI-Host": "covid-193.p.rapidapi.com"
-            
-        }
-    };
+  
+     //fetch data for the third API
+     const thirdSettings = {
+     async: true,
+     crossDomain: true,
+     url: "https://covid-193.p.rapidapi.com/history?country=usa&day=2020-06-02",
+     method: "GET",
+     headers: {
+         "X-RapidAPI-Key": "696cc32825mshf220551f0404d51p1201eajsn651d61b40bf0",
+         "X-RapidAPI-Host": "covid-193.p.rapidapi.com"
+     }
+ };
 
-    $.ajax(thirdSettings).done(function(response) {
-        console.log(response);
-        // Process and display the response as needed
-    });
+ $.ajax(secondSettings).done(function(response) {
+     console.log(response);
+ });
+
+
+    searchButton.on("click", function() {
+    const userInput = countryInput.val().trim();
+    if (userInput !== "") {
+        searchCountryData(userInput);
+    }else {
+        alert("Please enter a valid country name.");
+    }
+});
+
 });
